@@ -1,3 +1,4 @@
 const app = require("./app");
+const {PORT, API_URL} = require("./config");
 
-app.listen(3000, () => console.log("Server running at http://localhost:3000"));
+app.listen(PORT, () => console.log(`Server running at ${API_URL}`));
