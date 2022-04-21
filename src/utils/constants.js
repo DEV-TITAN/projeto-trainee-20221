@@ -49,6 +49,19 @@ const httpStatus = {
     HTTP_VERSION_NOT_SUPPORTED: 505,
 }
 
+const exitStatus = {
+    FAILURE: 0,
+    SUCCESS: 1,
+}
+
+const exitSignal = {
+    SIGINT: "SIGINT",
+    SIGTERM: "SIGTERM",
+    SIGQUIT: "SIGQUIT",
+};
+
 module.exports = {
-    httpStatus
+    httpStatus,
+    exitStatus,
+    exitSignal,
 }
