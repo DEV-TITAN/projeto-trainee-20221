@@ -4,11 +4,13 @@ class ProductController {
     constructor(
         createProductService,
         listProductsService,
-        updateProductService
+        updateProductService,
+        deleteProductService
     ) {
         this.createProductService = createProductService
         this.listProductsService = listProductsService
         this.updateProductService = updateProductService
+        this.deleteProductService = deleteProductService
     }
 
     async create(req, res) {
@@ -41,11 +43,22 @@ class ProductController {
 
         const product = await this.updateProductService.execute({productId, name, price, stock});
 
-        res.status(httpStatus.CREATED).json({
+        res.status(httpStatus.OK).json({
             status: "success",
             data: {
                 product
             }
+        });
+    }
+
+    async delete(req, res) {
+        const {productId} = req.params;
+
+        await this.deleteProductService.execute({productId});
+
+        res.status(httpStatus.OK).json({
+            status: "success",
+            data: null
         });
     }
 }

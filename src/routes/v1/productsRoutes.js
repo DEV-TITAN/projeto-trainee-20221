@@ -18,4 +18,9 @@ router.put("/:productId", async (req, res) => {
     await productController.update(req, res);
 });
 
+router.delete("/:productId", async (req, res) => {
+    const productController = ProductFactory.create();
+    await productController.delete(req, res);
+});
+
 module.exports = router;
