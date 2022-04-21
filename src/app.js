@@ -6,7 +6,12 @@ class App {
     constructor() {
         this.app = express();
 
+        this.setMiddlewares();
         this.setRoutes();
+    }
+
+    setMiddlewares() {
+        this.app.use(express.urlencoded({ extended: true }));
     }
 
     setRoutes() {
