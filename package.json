@@ -18,6 +18,9 @@
     "url": "https://github.com/DEV-TITAN/projeto-trainee-20221/issues"
   },
   "homepage": "https://github.com/DEV-TITAN/projeto-trainee-20221#readme",
+  "nodemonConfig": {
+    "ignore": ["*.json"]
+  },
   "dependencies": {
     "dotenv": "^16.0.0",
     "express": "^4.17.3"
