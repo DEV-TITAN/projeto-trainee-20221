@@ -16,7 +16,7 @@ class UpdateProductService {
             throw new Error("A product with this name already exists");
         }
 
-        const updatedProduct = await this.productRepository.update(productId, name, price, stock);
+        const updatedProduct = await this.productRepository.update(productId, {name, price, stock});
 
         return updatedProduct;
     }

@@ -43,7 +43,7 @@ class ProductRepository {
         return foundProduct ?? null;
     }
 
-    async update(productId, name, price, stock) {
+    async update(productId, {name, price, stock}) {
         const rawDb = await fs.promises.readFile(DB_PATH, "utf-8");
         const parsedDb = JSON.parse(rawDb);
 

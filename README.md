@@ -16,6 +16,7 @@ O projeto deve satisfazer as seguintes necessidades:
 - Permitir a entrada de usuários na loja com email e senha;
 - Criar produtos com as seguintes propriedades: ID, nome, preço e quantidade em estoque;
 - Ler todos os produtos previamente criados;
+- Ler os dados de um produto específico;
 - Atualizar os dados dos produtos;
 - Deletar um produto previamente criado.
 - Ao ser realizada a compra de um produto, o estoque deve ser subtraído

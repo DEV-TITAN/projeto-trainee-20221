@@ -13,6 +13,11 @@ router.get("/", async (req, res) => {
     await productController.index(req, res);
 });
 
+router.get("/:productId", async (req, res) => {
+    const productController = ProductFactory.create();
+    await productController.show(req, res);
+});
+
 router.put("/:productId", async (req, res) => {
     const productController = ProductFactory.create();
     await productController.update(req, res);

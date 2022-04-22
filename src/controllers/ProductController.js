@@ -4,11 +4,13 @@ class ProductController {
     constructor(
         createProductService,
         listProductsService,
+        getProductService,
         updateProductService,
-        deleteProductService
+        deleteProductService,
     ) {
         this.createProductService = createProductService
         this.listProductsService = listProductsService
+        this.getProductService = getProductService
         this.updateProductService = updateProductService
         this.deleteProductService = deleteProductService
     }
@@ -33,6 +35,19 @@ class ProductController {
             status: "success",
             data: {
                 products
+            }
+        });
+    }
+
+    async show(req, res) {
+        const {productId} = req.params;
+
+        const product = await this.getProductService.execute({productId});
+
+        res.status(httpStatus.OK).json({
+            status: "success",
+            data: {
+                product
             }
         });
     }
