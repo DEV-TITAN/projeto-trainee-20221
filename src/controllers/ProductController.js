@@ -1,6 +1,6 @@
-const {httpStatus} = require("../utils/constants");
+const BaseController = require("./BaseController");
 
-class ProductController {
+class ProductController extends BaseController {
     constructor(
         createProductService,
         listProductsService,
@@ -8,6 +8,7 @@ class ProductController {
         updateProductService,
         deleteProductService,
     ) {
+        super();
         this.createProductService = createProductService
         this.listProductsService = listProductsService
         this.getProductService = getProductService
@@ -20,23 +21,13 @@ class ProductController {
 
         const product = await this.createProductService.execute({name, price, stock});
 
-        res.status(httpStatus.CREATED).json({
-            status: "success",
-            data: {
-                product
-            }
-        });
+        this.created(res, { product });
     }
 
     async index(req, res) {
         const products = await this.listProductsService.execute();
 
-        res.status(httpStatus.OK).json({
-            status: "success",
-            data: {
-                products
-            }
-        });
+        this.ok(res, { products });
     }
 
     async show(req, res) {
@@ -44,12 +35,7 @@ class ProductController {
 
         const product = await this.getProductService.execute({productId});
 
-        res.status(httpStatus.OK).json({
-            status: "success",
-            data: {
-                product
-            }
-        });
+        this.ok(res, { product });
     }
 
     async update(req, res) {
@@ -58,12 +44,7 @@ class ProductController {
 
         const product = await this.updateProductService.execute({productId, name, price, stock});
 
-        res.status(httpStatus.OK).json({
-            status: "success",
-            data: {
-                product
-            }
-        });
+        this.ok(res, { product });
     }
 
     async delete(req, res) {
@@ -71,10 +52,7 @@ class ProductController {
 
         await this.deleteProductService.execute({productId});
 
-        res.status(httpStatus.OK).json({
-            status: "success",
-            data: null
-        });
+        this.ok(res, null);
     }
 }
 
