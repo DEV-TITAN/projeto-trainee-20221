@@ -4,6 +4,11 @@ const express = require("express");
 const routes = require("./routes");
 const ErrorHandlerMiddleware = require("./middlewares/ErrorHandlerMiddleware");
 const LoggerMiddleware = require("./middlewares/LoggerMiddleware");
+const path = require("path");
+const expressLayouts = require('express-ejs-layouts');
+
+const assetsDir = path.join(__dirname, "..", "public");
+const viewsDir = path.join(__dirname, "views");
 
 class App {
     constructor() {
@@ -17,7 +22,14 @@ class App {
     setMiddlewares() {
         const loggerMiddleware = new LoggerMiddleware();
 
+        this.app.set('views', viewsDir)
+        this.app.set('view engine', 'ejs')
+        this.app.set('layout', 'layouts/main')
+
+        this.app.use(expressLayouts);
+        this.app.use(express.json());
         this.app.use(express.urlencoded({ extended: true }));
+        this.app.use(express.static(assetsDir));
         this.app.use((req, res, next) => {
             loggerMiddleware.logRequest(req, res, next);
         });
