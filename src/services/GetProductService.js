@@ -1,3 +1,6 @@
+const { httpStatus } = require("../utils/constants");
+const {ApiError} = require("../utils/errors");
+
 class GetProductService {
     constructor(productRepository) {
         this.productRepository = productRepository;
@@ -7,7 +10,7 @@ class GetProductService {
         const product = await this.productRepository.findById(productId);
 
         if (!product) {
-            throw new Error("Product not found");
+            throw new ApiError("Product not found", httpStatus.NOT_FOUND);
         }
 
         return product;

@@ -2,18 +2,8 @@ const app = require("./app");
 const {PORT, API_URL} = require("./config");
 const {exitStatus, exitSignal} = require("./utils/constants");
 
-process.on("unhandledRejection", (reason, promise) => {
-    // Throw the error and let the `uncaughtException` handler handle it
-    throw reason;
-});
-
-process.on("uncaughtException", error => {
-    console.error(error.stack);
-    process.exit(exitStatus.FAILURE);
-});
-
 function main() {
-    const server = app.listen(PORT, () => console.log(`Server running at ${API_URL}`));
+    const server = app.listen(PORT, () => console.info(`Server running at ${API_URL}`));
 
     const exitSignals = Object.values(exitSignal);
 
@@ -31,5 +21,15 @@ function main() {
         });
     });
 }
+
+process.on("unhandledRejection", (reason, promise) => {
+    // Throw the error and let the `uncaughtException` handler handle it
+    throw reason;
+});
+
+process.on("uncaughtException", error => {
+    console.error(error.stack);
+    process.exit(exitStatus.FAILURE);
+});
 
 main();

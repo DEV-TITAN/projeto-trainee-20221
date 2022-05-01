@@ -1,7 +1,8 @@
-const express = require("express");
 require("dotenv").config();
 require("express-async-errors");
+const express = require("express");
 const routes = require("./routes");
+const ErrorHandlerMiddleware = require("./middlewares/ErrorHandlerMiddleware");
 
 class App {
     constructor() {
@@ -9,6 +10,7 @@ class App {
 
         this.setMiddlewares();
         this.setRoutes();
+        this.setErrorHandling();
     }
 
     setMiddlewares() {
@@ -17,6 +19,16 @@ class App {
 
     setRoutes() {
         this.app.use(routes);
+    }
+
+    /**
+     * This must be the last middleware set
+     */
+    setErrorHandling() {
+        const errorHandlerMiddleware = new ErrorHandlerMiddleware();
+        this.app.use((err, req, res, next) => {
+            errorHandlerMiddleware.handleError(err, req, res, next);
+        });
     }
 }
 

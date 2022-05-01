@@ -1,4 +1,5 @@
 const {httpStatus} = require("../utils/constants");
+const {ApiError} = require("../utils/errors");
 
 class BaseController {
     jsonResponse(data) {
@@ -23,8 +24,7 @@ class BaseController {
     }
 
     notImplemented() {
-        // throw new ApiError("Not Implemented", httpStatus.NOT_IMPLEMENTED);
-        throw new Error("Not Implemented");
+        throw new ApiError("Not Implemented", httpStatus.NOT_IMPLEMENTED);
     }
 }
 
