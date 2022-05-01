@@ -3,6 +3,7 @@ require("express-async-errors");
 const express = require("express");
 const routes = require("./routes");
 const ErrorHandlerMiddleware = require("./middlewares/ErrorHandlerMiddleware");
+const LoggerMiddleware = require("./middlewares/LoggerMiddleware");
 
 class App {
     constructor() {
@@ -14,7 +15,12 @@ class App {
     }
 
     setMiddlewares() {
+        const loggerMiddleware = new LoggerMiddleware();
+
         this.app.use(express.urlencoded({ extended: true }));
+        this.app.use((req, res, next) => {
+            loggerMiddleware.logRequest(req, res, next);
+        });
     }
 
     setRoutes() {

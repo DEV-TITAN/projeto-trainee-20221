@@ -2,7 +2,7 @@ const path = require("path");
 const fs = require("fs");
 const Product = require("../models/Product");
 
-const DB_PATH = path.join(__dirname, "../database/database.json");
+const DB_PATH = path.join(__dirname, "..", "database", "database.json");
 
 class ProductRepository {
     async create(name, price, stock) {
