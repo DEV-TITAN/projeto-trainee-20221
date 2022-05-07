@@ -2,9 +2,11 @@ const { Router } = require("express");
 const { httpStatus } = require("../utils/constants");
 const { HttpError } = require("../utils/errors");
 const productsRoutes = require("./productsRoutes");
+const homeRoutes = require("./homeRoutes");
 
 const router = Router();
 
+router.use(["/home", "/"], homeRoutes);
 router.use("/products", productsRoutes);
 
 /**
