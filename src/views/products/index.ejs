@@ -1,0 +1,31 @@
+<h1>List of Products</h1>
+<% if (products.length) { %>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Stock</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% products.forEach(product => { %>
+                <tr>
+                    <td>
+                        <a href=<%= `/products/show/${product.id}` %>>
+                            <%= product.name %>
+                        </a>
+                    </td>
+                    <td><%= product.price %></td>
+                    <td><%= product.stock %></td>
+                    <td>
+                        <a href=<%= `/products/update/${product.id}` %>>Edit</a> | 
+                        <a href="/products/delete/<%= product.id %>">Delete</a>
+                    </td>
+                </tr>
+            <% }); %>
+        </tbody>
+    </table>
+<% } else {%>
+    No products found.
+<% } %>

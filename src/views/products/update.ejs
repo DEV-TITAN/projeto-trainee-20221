@@ -1,0 +1,7 @@
+<h1>Edit Product</h1>
+<form method="POST" action=<%= `/products/update-product/${product.id}` %>>
+    <input type="text" name="name" placeholder="Enter Name">
+    <input type="text" name="price" placeholder="Enter Price">
+    <input type="text" name="stock" placeholder="Enter Stock">
+    <button type="submit">Submit</button>
+</form>
