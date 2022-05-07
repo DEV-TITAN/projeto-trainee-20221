@@ -57,6 +57,9 @@ class ProductRepository {
             });
         }
 
+        const idx = parsedDb.products.findIndex(product => product.id === productId);
+        parsedDb.products[idx] = foundProduct;
+
         await fs.promises.writeFile(DB_PATH, JSON.stringify(parsedDb, null, 4));
 
         return foundProduct;

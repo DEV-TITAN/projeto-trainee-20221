@@ -1,22 +1,17 @@
 const { Router } = require("express");
 const { httpStatus } = require("../utils/constants");
 const { HttpError } = require("../utils/errors");
-const v1Routes = require("./v1");
+const productsRoutes = require("./productsRoutes");
 
 const router = Router();
 
-router.use("/v1", v1Routes);
+router.use("/products", productsRoutes);
 
-router.get("/ping", (req, res) => {
-    res.json({
-            status: "success",
-            message: "pong"
-        });
-});
-
-// Must be the last one
+/**
+ * This one must be the last route
+ */
 router.use((req, res) => {
-    throw new HttpError("Not Found", httpStatus.NOT_FOUND);
+    throw new HttpError(`Cannot find ${req.url}`, httpStatus.NOT_FOUND);
 });
 
 module.exports = router;

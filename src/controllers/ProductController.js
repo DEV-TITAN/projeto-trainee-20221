@@ -1,6 +1,4 @@
-const BaseController = require("./BaseController");
-
-class ProductController extends BaseController {
+class ProductController {
     constructor(
         createProductService,
         listProductsService,
@@ -8,7 +6,6 @@ class ProductController extends BaseController {
         updateProductService,
         deleteProductService,
     ) {
-        super();
         this.createProductService = createProductService
         this.listProductsService = listProductsService
         this.getProductService = getProductService
@@ -16,18 +13,22 @@ class ProductController extends BaseController {
         this.deleteProductService = deleteProductService
     }
 
-    async create(req, res) {
+    async createProduct(req, res) {
         const {name, price, stock} = req.body;
 
-        const product = await this.createProductService.execute({name, price, stock});
+        await this.createProductService.execute({name, price, stock});
 
-        this.created(res, { product });
+        res.redirect("/products/create");
+    }
+
+    create(req, res) {
+        res.render("products/create", { title: "Create Product" });
     }
 
     async index(req, res) {
         const products = await this.listProductsService.execute();
 
-        this.ok(res, { products });
+        res.render("products/index", { title: "List of Products", products });
     }
 
     async show(req, res) {
@@ -35,16 +36,23 @@ class ProductController extends BaseController {
 
         const product = await this.getProductService.execute({productId});
 
-        this.ok(res, { product });
+        res.render("products/show", { title: product.name, product });
     }
 
-    async update(req, res) {
+    async updateProduct(req, res) {
         const {productId} = req.params;
         const {name, price, stock} = req.body;
 
         const product = await this.updateProductService.execute({productId, name, price, stock});
 
-        this.ok(res, { product });
+        res.redirect(`/products/show/${product.id}`);
+    }
+
+    async update(req, res) {
+        const {productId} = req.params;
+        const product = await this.getProductService.execute({productId});
+
+        res.render("products/update", { title: "Update Product", product });
     }
 
     async delete(req, res) {
@@ -52,7 +60,7 @@ class ProductController extends BaseController {
 
         await this.deleteProductService.execute({productId});
 
-        this.ok(res, null);
+        res.redirect("/products");
     }
 }
 

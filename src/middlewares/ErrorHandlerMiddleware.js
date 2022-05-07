@@ -5,35 +5,26 @@ class ErrorHandlerMiddleware {
     handleError(err, req, res, next) {
         console.error(err.stack);
 
-        if (err instanceof HttpError) {
-            const jsonResponse = {
-                status: "error",
-                code: err.statusCode,
-                message: err.message,
-            };
+        const title = err.statusCode === httpStatus.NOT_FOUND ? "Not Found" : "Error";
 
-            res.status(err.statusCode).json(jsonResponse);
+
+        if (err instanceof HttpError) {
+            res.render("error", {title, error: err});
             return;
         }
 
         if (err instanceof SyntaxError) {
-            const jsonResponse = {
-                status: "error",
-                code: httpStatus.BAD_REQUEST,
+            res.render("error", {title, error: {
+                statusCode: httpStatus.BAD_REQUEST,
                 message: err.message,
-            };
-
-            res.status(httpStatus.BAD_REQUEST).json(jsonResponse);
+            } });
             return;
         }
 
-        const jsonResponse = {
-            status: "error",
-            code: httpStatus.INTERNAL_SERVER_ERROR,
+        res.render("error", {title, error: {
+            statusCode: httpStatus.INTERNAL_SERVER_ERROR,
             message: "Internal Server Error",
-        };
-
-        res.status(jsonResponse.code).json(jsonResponse);
+        } });
     }
 }
 
