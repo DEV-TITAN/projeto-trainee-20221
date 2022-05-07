@@ -1,0 +1,15 @@
+body {
+    background-color: #EEEEEE;
+}
+
+header, footer {
+    background-color: #F8F8FF;
+    padding: 20px;
+}
+
+.wrapper {
+    width: 700px;
+    margin: 0 auto;
+    background-color: #FFFFFF;
+    padding: 10px;
+}
