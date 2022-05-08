@@ -8,7 +8,7 @@ const GetProductService = require("../services/GetProductService");
 const ProductController = require("../controllers/ProductController");
 
 class ProductControllerFactory {
-    getProductController() {
+    static getProductController() {
         const productRepository = new ProductRepository(db);
         const createProductService = new CreateProductService(productRepository);
         const listProductsService = new ListProductsService(productRepository);
