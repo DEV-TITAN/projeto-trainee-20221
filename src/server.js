@@ -1,10 +1,17 @@
 const app = require("./app");
 const {PORT, API_URL} = require("./config");
 const {exitStatus, exitSignal} = require("./utils/constants");
+const db = require("./database");
 
-function main() {
+async function main() {
+    try {
+        await db.connect();
+        console.info("Succesfully connected to database");
+    } catch (err) {
+        console.error(err.stack);
+    }
+
     const server = app.listen(PORT, () => console.info(`Server running at ${API_URL}`));
-
     const exitSignals = Object.values(exitSignal);
 
     exitSignals.forEach(exitSignal => {
