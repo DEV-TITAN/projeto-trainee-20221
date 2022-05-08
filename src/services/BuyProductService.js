@@ -3,11 +3,11 @@ const {ApiError} = require("../utils/errors");
 
 class BuyProductService {
     constructor(productRepository) {
-        this.productRepository = productRepository;
+        this.__productRepository = productRepository;
     }
 
     async execute({productId, quantity}) {
-        const product = await this.productRepository.findById(productId);
+        const product = await this.__productRepository.findById(productId);
 
         if (!product) {
             throw new Error("Product not found");
@@ -19,7 +19,7 @@ class BuyProductService {
 
         const newStock = product.stock - quantity;
 
-        await this.productRepository.update(productId, {stock: newStock});
+        await this.__productRepository.update(productId, {stock: newStock});
     }
 }
 
