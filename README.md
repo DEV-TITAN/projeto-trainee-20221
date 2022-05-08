@@ -65,7 +65,7 @@ found.
 The `main` branch is deployed on Heroku and it's ready for use. Check the link
 below:
 
-- [Production]()
+- [Production](https://projeto-trainee-20221.herokuapp.com)
 
 ## Documentation
 
