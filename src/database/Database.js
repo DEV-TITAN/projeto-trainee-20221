@@ -1,18 +1,17 @@
 const path = require("path");
 const fs = require("fs");
+const {DB_PATH} = require("../config/database");
 
 class Database {
-    path = path.join(__dirname, "database.json");
-
     async connect() {
         try {
-            if (!fs.existsSync(this.path)) {
-                await fs.promises.writeFile(this.path, JSON.stringify({
+            if (!fs.existsSync(DB_PATH)) {
+                await fs.promises.writeFile(DB_PATH, JSON.stringify({
                     products: []
                 }, null, 4));
             }
 
-            this.client = JSON.parse(await fs.promises.readFile(this.path, "utf-8"));
+            this.client = JSON.parse(await fs.promises.readFile(DB_PATH, "utf-8"));
 
             return this.client;
             } catch (err) {
