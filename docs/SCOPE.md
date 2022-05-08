@@ -38,12 +38,4 @@ O cumprimento destes requisitos será bem visto na avaliação:
     - Deve ser possível adicionar um produto da lista de desejos diretamente ao carrinho, caso tenha sido implementado o carrinho de compras;
 - Efetuar o ["deployment"](https://en.wikipedia.org/wiki/Software_deployment) do projeto.
 
-## Stack do Projeto
-
-- [HTML](https://developer.mozilla.org/en-US/docs/Web/HTML)
-- [CSS](https://developer.mozilla.org/en-US/docs/Web/CSS)
-- [Javascript](https://javascript.info)
-- [Node.js](https://nodejs.dev/learn)
-- [Express](https://expressjs.com)
-
-Os dados serão persistidos num arquivo [JSON](https://en.wikipedia.org/wiki/JSON) o qual representará um [banco de dados](https://pt.wikipedia.org/wiki/Banco_de_dados).
+OBS.: Os dados serão persistidos num arquivo [JSON](https://en.wikipedia.org/wiki/JSON) o qual representará um [banco de dados](https://pt.wikipedia.org/wiki/Banco_de_dados).
